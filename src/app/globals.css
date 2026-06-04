@@ -19,6 +19,7 @@
 
   /* ── Grey ── */
   --color-grey-1000: #1f2030;
+  --color-grey-950: #212739;
   --color-grey-900: #626369;
   --color-grey-800: #a5a6ac;
   --color-grey-600: #d2d3d5;
@@ -113,13 +114,35 @@
   --text-serif-h2: 1rem;
   --text-serif-h2--line-height: 1.5rem;
 
-  /* ── Text scale: DM Sans (onboarding / display) ── */
+  /* ── Text scale: DM Sans Headlines ── */
+  /* Headlines/DM Sans/H1 — Medium 36px / 130% / ls -2% */
   --text-display-h1: 2.25rem;
   --text-display-h1--line-height: 2.9125rem;
+  /* Headlines/DM Sans H1 Bold — same size, use font-bold */
+
+  /* ── Text scale: Onboarding flow / DM Sans ── */
+  /* Onboarding/H1 — Medium 32px / 40px / ls -2% */
+  --text-onboarding-h1: 2rem;
+  --text-onboarding-h1--line-height: 2.5rem;
+  /* Onboarding/H2 — Medium 28px / 40px / ls -2% */
   --text-display-h2: 1.75rem;
   --text-display-h2--line-height: 2.5rem;
+  /* Onboarding/H3 — Bold 20px / 128% / ls -1% */
   --text-display-h3: 1.25rem;
   --text-display-h3--line-height: 1.6rem;
+  /* Onboarding/H4 — Inter Bold 18px / auto. Use text-h3 + font-bold */
+  /* Onboarding/H5 — Inter Bold 16px / auto. Use text-h4 + font-bold */
+  /* Onboarding/Body L — Inter Medium 18px / 28px */
+  --text-onboarding-body-l: 1.125rem;
+  --text-onboarding-body-l--line-height: 1.75rem;
+  /* Onboarding/Body M — Inter Regular 14px / 18px */
+  --text-onboarding-body-m: 0.875rem;
+  --text-onboarding-body-m--line-height: 1.125rem;
+
+  /* ── Letter spacing ── */
+  /* Used with DM Sans display and onboarding H1/H2 (-2%) and H3 (-1%) */
+  --tracking-display: -0.02em;
+  --tracking-display-sm: -0.01em;
 }
 
 /* ─────────────────────────────────────────────────────────────────
@@ -146,6 +169,7 @@
 
   /* Grey */
   --color-grey-1000: var(--color-grey-1000);
+  --color-grey-950: var(--color-grey-950);
   --color-grey-900: var(--color-grey-900);
   --color-grey-800: var(--color-grey-800);
   --color-grey-600: var(--color-grey-600);
@@ -237,10 +261,18 @@
   --text-serif-h2--line-height: var(--text-serif-h2--line-height);
   --text-display-h1: var(--text-display-h1);
   --text-display-h1--line-height: var(--text-display-h1--line-height);
+  --text-onboarding-h1: var(--text-onboarding-h1);
+  --text-onboarding-h1--line-height: var(--text-onboarding-h1--line-height);
   --text-display-h2: var(--text-display-h2);
   --text-display-h2--line-height: var(--text-display-h2--line-height);
   --text-display-h3: var(--text-display-h3);
   --text-display-h3--line-height: var(--text-display-h3--line-height);
+  --text-onboarding-body-l: var(--text-onboarding-body-l);
+  --text-onboarding-body-l--line-height: var(--text-onboarding-body-l--line-height);
+  --text-onboarding-body-m: var(--text-onboarding-body-m);
+  --text-onboarding-body-m--line-height: var(--text-onboarding-body-m--line-height);
+  --tracking-display: var(--tracking-display);
+  --tracking-display-sm: var(--tracking-display-sm);
 }
 
 @media (prefers-color-scheme: dark) {

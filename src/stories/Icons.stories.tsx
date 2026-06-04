@@ -1,24 +1,27 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { icons } from '../components/ui/icons/icons-data'
 
-// ─── Component ───────────────────────────────────────────────────────────────
+const arrows = icons.filter(i => i.name.startsWith('arrow-'))
+const navIcons = icons.filter(i => !i.name.startsWith('arrow-'))
 
-interface IconGridProps {
+// ─── Sub-components ───────────────────────────────────────────────────────────
+
+interface GridProps {
+  items: typeof icons
   size: number
   color: string
   showNames: boolean
 }
 
-const IconGrid = ({ size, color, showNames }: IconGridProps) => (
+const IconTileGrid = ({ items, size, color, showNames }: GridProps) => (
   <div
     style={{
       display: 'grid',
       gridTemplateColumns: `repeat(auto-fill, minmax(${size + 48}px, 1fr))`,
       gap: '8px',
-      padding: '16px',
     }}
   >
-    {icons.map(({ name, svg }) => (
+    {items.map(({ name, svg }) => (
       <div
         key={name}
         title={name}
@@ -59,6 +62,30 @@ const IconGrid = ({ size, color, showNames }: IconGridProps) => (
   </div>
 )
 
+// ─── Main component ───────────────────────────────────────────────────────────
+
+interface IconGridProps {
+  size: number
+  color: string
+  showNames: boolean
+}
+
+const sectionLabel = (text: string, count: number) => (
+  <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, margin: '24px 0 12px' }}>
+    <span style={{ fontSize: 13, fontWeight: 600, color: '#1f2030' }}>{text}</span>
+    <span style={{ fontSize: 11, color: '#a5a6ac' }}>{count}</span>
+  </div>
+)
+
+const IconGrid = ({ size, color, showNames }: IconGridProps) => (
+  <div style={{ padding: 16 }}>
+    {sectionLabel('Arrows', arrows.length)}
+    <IconTileGrid items={arrows} size={size} color={color} showNames={showNames} />
+    {sectionLabel('Navigation Icons', navIcons.length)}
+    <IconTileGrid items={navIcons} size={size} color={color} showNames={showNames} />
+  </div>
+)
+
 // ─── Meta ─────────────────────────────────────────────────────────────────────
 
 const meta = {
@@ -67,18 +94,9 @@ const meta = {
   parameters: { layout: 'fullscreen' },
   tags: ['autodocs'],
   argTypes: {
-    size: {
-      control: { type: 'range', min: 16, max: 48, step: 4 },
-      description: 'Icon size in px',
-    },
-    color: {
-      control: 'color',
-      description: 'Icon stroke / fill color',
-    },
-    showNames: {
-      control: 'boolean',
-      description: 'Show icon name below each icon',
-    },
+    size: { control: { type: 'range', min: 16, max: 48, step: 4 } },
+    color: { control: 'color' },
+    showNames: { control: 'boolean' },
   },
   args: {
     size: 24,
@@ -94,14 +112,8 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {}
 
-export const Large: Story = {
-  args: { size: 40 },
-}
+export const Large: Story = { args: { size: 40 } }
 
-export const Brand: Story = {
-  args: { color: '#c95bc1' },
-}
+export const Brand: Story = { args: { color: '#c95bc1' } }
 
-export const NoLabels: Story = {
-  args: { showNames: false, size: 32 },
-}
+export const NoLabels: Story = { args: { showNames: false, size: 32 } }

@@ -1,4 +1,20 @@
 // Auto-generated — do not edit manually
+export { default as ArrowFilledDown } from './arrow-filled-down.svg';
+export { default as ArrowFilledLeft } from './arrow-filled-left.svg';
+export { default as ArrowFilledRight } from './arrow-filled-right.svg';
+export { default as ArrowFilledUp } from './arrow-filled-up.svg';
+export { default as ArrowLineDownRound } from './arrow-line-down-round.svg';
+export { default as ArrowLineDown } from './arrow-line-down.svg';
+export { default as ArrowLineLeftRound } from './arrow-line-left-round.svg';
+export { default as ArrowLineLeft } from './arrow-line-left.svg';
+export { default as ArrowLineRightRound } from './arrow-line-right-round.svg';
+export { default as ArrowLineRight } from './arrow-line-right.svg';
+export { default as ArrowLineUpRound } from './arrow-line-up-round.svg';
+export { default as ArrowLineUp } from './arrow-line-up.svg';
+export { default as ArrowSimpleDown } from './arrow-simple-down.svg';
+export { default as ArrowSimpleLeft } from './arrow-simple-left.svg';
+export { default as ArrowSimpleRight } from './arrow-simple-right.svg';
+export { default as ArrowSimpleUp } from './arrow-simple-up.svg';
 export { default as IcAdd } from './ic-add.svg';
 export { default as IcAgent } from './ic-agent.svg';
 export { default as IcChatBubble } from './ic-chat-bubble.svg';
