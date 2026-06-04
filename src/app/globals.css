@@ -1,15 +1,246 @@
 @import "tailwindcss";
 
+/* ─────────────────────────────────────────────────────────────────
+   Design tokens — always available as CSS custom properties.
+   Tailwind v4 only writes @theme variables to :root when a matching
+   utility class is scanned in source. Defining them here in :root
+   ensures they're available for CSS, JS and arbitrary values at all
+   times, while @theme inline below wires them into Tailwind utilities.
+   ───────────────────────────────────────────────────────────────── */
+
 :root {
+  /* App-level surfaces */
   --background: #ffffff;
   --foreground: #171717;
+
+  /* ── Semantic aliases ── */
+  --color-primary: var(--color-orchid-1000);
+  --radius-card: var(--radius-xl);
+
+  /* ── Grey ── */
+  --color-grey-1000: #1f2030;
+  --color-grey-900: #626369;
+  --color-grey-800: #a5a6ac;
+  --color-grey-600: #d2d3d5;
+  --color-grey-400: #e0e0e2;
+  --color-grey-200: #ebebee;
+  --color-grey-100: #f5f5f7;
+  --color-grey-50: #fafafb;
+
+  /* ── Vivid Orchid (brand primary) ── */
+  --color-orchid-1000: #c95bc1;
+  --color-orchid-900: #dc93d7;
+  --color-orchid-600: #eabee7;
+  --color-orchid-400: #eecdec;
+  --color-orchid-200: #f5e1f4;
+  --color-orchid-100: #f9eef9;
+  --color-orchid-50: #fcf7fc;
+
+  /* ── Semantic surface colors ── */
+  --color-green: #e8fde3;
+  --color-lavender: #e3e9fd;
+
+  /* ── Tag palette ── */
+  --color-tag-teal-300: #065d76;
+  --color-tag-teal-100: #e3f7f7;
+  --color-tag-yellow-900: #5f4b00;
+  --color-tag-yellow-600: #d9a516;
+  --color-tag-yellow-100: #f9eec9;
+  --color-tag-red-900: #760e05;
+  --color-tag-red-600: #feedec;
+  --color-tag-green-900: #095a41;
+  --color-tag-green-600: #dcf7e9;
+  --color-tag-pink-900: #9a1b4f;
+  --color-tag-pink-600: #fae8f3;
+
+  /* ── Avatar / variant accent colors ── */
+  --color-variant-blue: #0000ff;
+  --color-variant-verdigris: #06a192;
+  --color-variant-indigo-bloom: #6d18b9;
+  --color-variant-wild-strawberry: #f74980;
+  --color-variant-jungle-green: #21a366;
+  --color-variant-cool-sky: #3da5fa;
+  --color-variant-amber-glow: #ffa02e;
+  --color-variant-vibrant-coral: #f86d60;
+  --color-variant-bubblegum-pink: #fb6382;
+  --color-variant-royal-orchid: #9800b6;
+  --color-variant-autumn-ember: #b75f17;
+  --color-variant-indigo: #650680;
+  --color-variant-dark-emerald: #0e5f21;
+  --color-variant-sapphire-sky: #176ada;
+  --color-variant-fiery-terracotta: #f74b3b;
+  --color-variant-goldenrod: #d9a516;
+
+  /* ── Border radius ── */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  /* ── Shadows ── */
+  --shadow-s: 2px 4px 16px 0px rgba(0, 0, 0, 0.08);
+
+  /* ── Text scale: Headlines / Inter ── */
+  --text-h1: 2.25rem;
+  --text-h1--line-height: 2.5rem;
+  --text-h2: 1.5rem;
+  --text-h2--line-height: 2.5rem;
+  --text-h3: 1.125rem;
+  --text-h3--line-height: 1.75rem;
+  --text-h4: 1rem;
+  --text-h4--line-height: 1.5rem;
+  --text-h5: 0.875rem;
+  --text-h5--line-height: 1rem;
+  --text-h6: 0.8125rem;
+  --text-h6--line-height: 1rem;
+
+  /* ── Text scale: Body / Inter ── */
+  --text-body-xl: 1.25rem;
+  --text-body-xl--line-height: 1.75rem;
+  --text-body-l: 0.875rem;
+  --text-body-l--line-height: 1.5rem;
+  --text-body-m: 0.8125rem;
+  --text-body-m--line-height: 1.125rem;
+  --text-body-s: 0.75rem;
+  --text-body-s--line-height: 1rem;
+  --text-body-xs: 0.75rem;
+  --text-body-xs--line-height: 1rem;
+
+  /* ── Text scale: Hedvig Letters Serif ── */
+  --text-serif-h1: 1.25rem;
+  --text-serif-h1--line-height: 2rem;
+  --text-serif-h2: 1rem;
+  --text-serif-h2--line-height: 1.5rem;
+
+  /* ── Text scale: DM Sans (onboarding / display) ── */
+  --text-display-h1: 2.25rem;
+  --text-display-h1--line-height: 2.9125rem;
+  --text-display-h2: 1.75rem;
+  --text-display-h2--line-height: 2.5rem;
+  --text-display-h3: 1.25rem;
+  --text-display-h3--line-height: 1.6rem;
 }
 
+/* ─────────────────────────────────────────────────────────────────
+   Tailwind utilities — maps :root tokens to generated utility classes.
+   Using @theme inline so utilities reference the :root vars via var().
+   ───────────────────────────────────────────────────────────────── */
+
 @theme inline {
+  /* App surfaces */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  /* Semantic aliases */
+  --color-primary: var(--color-primary);
+  --radius-card: var(--radius-card);
+
+  /* Next.js font variables */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Font families — defined statically (not in :root) */
+  --font-serif: "Hedvig Letters Serif", serif;
+  --font-display: "DM Sans", sans-serif;
+
+  /* Grey */
+  --color-grey-1000: var(--color-grey-1000);
+  --color-grey-900: var(--color-grey-900);
+  --color-grey-800: var(--color-grey-800);
+  --color-grey-600: var(--color-grey-600);
+  --color-grey-400: var(--color-grey-400);
+  --color-grey-200: var(--color-grey-200);
+  --color-grey-100: var(--color-grey-100);
+  --color-grey-50: var(--color-grey-50);
+
+  /* Orchid */
+  --color-orchid-1000: var(--color-orchid-1000);
+  --color-orchid-900: var(--color-orchid-900);
+  --color-orchid-600: var(--color-orchid-600);
+  --color-orchid-400: var(--color-orchid-400);
+  --color-orchid-200: var(--color-orchid-200);
+  --color-orchid-100: var(--color-orchid-100);
+  --color-orchid-50: var(--color-orchid-50);
+
+  /* Semantic */
+  --color-green: var(--color-green);
+  --color-lavender: var(--color-lavender);
+
+  /* Tag */
+  --color-tag-teal-300: var(--color-tag-teal-300);
+  --color-tag-teal-100: var(--color-tag-teal-100);
+  --color-tag-yellow-900: var(--color-tag-yellow-900);
+  --color-tag-yellow-600: var(--color-tag-yellow-600);
+  --color-tag-yellow-100: var(--color-tag-yellow-100);
+  --color-tag-red-900: var(--color-tag-red-900);
+  --color-tag-red-600: var(--color-tag-red-600);
+  --color-tag-green-900: var(--color-tag-green-900);
+  --color-tag-green-600: var(--color-tag-green-600);
+  --color-tag-pink-900: var(--color-tag-pink-900);
+  --color-tag-pink-600: var(--color-tag-pink-600);
+
+  /* Variants */
+  --color-variant-blue: var(--color-variant-blue);
+  --color-variant-verdigris: var(--color-variant-verdigris);
+  --color-variant-indigo-bloom: var(--color-variant-indigo-bloom);
+  --color-variant-wild-strawberry: var(--color-variant-wild-strawberry);
+  --color-variant-jungle-green: var(--color-variant-jungle-green);
+  --color-variant-cool-sky: var(--color-variant-cool-sky);
+  --color-variant-amber-glow: var(--color-variant-amber-glow);
+  --color-variant-vibrant-coral: var(--color-variant-vibrant-coral);
+  --color-variant-bubblegum-pink: var(--color-variant-bubblegum-pink);
+  --color-variant-royal-orchid: var(--color-variant-royal-orchid);
+  --color-variant-autumn-ember: var(--color-variant-autumn-ember);
+  --color-variant-indigo: var(--color-variant-indigo);
+  --color-variant-dark-emerald: var(--color-variant-dark-emerald);
+  --color-variant-sapphire-sky: var(--color-variant-sapphire-sky);
+  --color-variant-fiery-terracotta: var(--color-variant-fiery-terracotta);
+  --color-variant-goldenrod: var(--color-variant-goldenrod);
+
+  /* Border radius */
+  --radius-xs: var(--radius-xs);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+
+  /* Shadows */
+  --shadow-s: var(--shadow-s);
+
+  /* Text scale */
+  --text-h1: var(--text-h1);
+  --text-h1--line-height: var(--text-h1--line-height);
+  --text-h2: var(--text-h2);
+  --text-h2--line-height: var(--text-h2--line-height);
+  --text-h3: var(--text-h3);
+  --text-h3--line-height: var(--text-h3--line-height);
+  --text-h4: var(--text-h4);
+  --text-h4--line-height: var(--text-h4--line-height);
+  --text-h5: var(--text-h5);
+  --text-h5--line-height: var(--text-h5--line-height);
+  --text-h6: var(--text-h6);
+  --text-h6--line-height: var(--text-h6--line-height);
+  --text-body-xl: var(--text-body-xl);
+  --text-body-xl--line-height: var(--text-body-xl--line-height);
+  --text-body-l: var(--text-body-l);
+  --text-body-l--line-height: var(--text-body-l--line-height);
+  --text-body-m: var(--text-body-m);
+  --text-body-m--line-height: var(--text-body-m--line-height);
+  --text-body-s: var(--text-body-s);
+  --text-body-s--line-height: var(--text-body-s--line-height);
+  --text-body-xs: var(--text-body-xs);
+  --text-body-xs--line-height: var(--text-body-xs--line-height);
+  --text-serif-h1: var(--text-serif-h1);
+  --text-serif-h1--line-height: var(--text-serif-h1--line-height);
+  --text-serif-h2: var(--text-serif-h2);
+  --text-serif-h2--line-height: var(--text-serif-h2--line-height);
+  --text-display-h1: var(--text-display-h1);
+  --text-display-h1--line-height: var(--text-display-h1--line-height);
+  --text-display-h2: var(--text-display-h2);
+  --text-display-h2--line-height: var(--text-display-h2--line-height);
+  --text-display-h3: var(--text-display-h3);
+  --text-display-h3--line-height: var(--text-display-h3--line-height);
 }
 
 @media (prefers-color-scheme: dark) {
