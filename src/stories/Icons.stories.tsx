@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { icons } from '../components/ui/icons/icons-data'
+import { Icon } from '../components/ui/icons/Icon'
 
-const arrows = icons.filter(i => i.name.startsWith('arrow-'))
+const arrows  = icons.filter(i => i.name.startsWith('arrow-'))
 const navIcons = icons.filter(i => !i.name.startsWith('arrow-'))
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
@@ -21,7 +22,7 @@ const IconTileGrid = ({ items, size, color, showNames }: GridProps) => (
       gap: '8px',
     }}
   >
-    {items.map(({ name, svg }) => (
+    {items.map(({ name }) => (
       <div
         key={name}
         title={name}
@@ -39,10 +40,7 @@ const IconTileGrid = ({ items, size, color, showNames }: GridProps) => (
         onMouseEnter={e => (e.currentTarget.style.background = '#f5f5f7')}
         onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
       >
-        <div
-          style={{ width: size, height: size, color, flexShrink: 0 }}
-          dangerouslySetInnerHTML={{ __html: svg }}
-        />
+        <Icon name={name} size={size} style={{ color }} />
         {showNames && (
           <span
             style={{
@@ -80,7 +78,7 @@ const sectionLabel = (text: string, count: number) => (
 const IconGrid = ({ size, color, showNames }: IconGridProps) => (
   <div style={{ padding: 16 }}>
     {sectionLabel('Arrows', arrows.length)}
-    <IconTileGrid items={arrows} size={size} color={color} showNames={showNames} />
+    <IconTileGrid items={arrows}   size={size} color={color} showNames={showNames} />
     {sectionLabel('Navigation Icons', navIcons.length)}
     <IconTileGrid items={navIcons} size={size} color={color} showNames={showNames} />
   </div>
@@ -94,8 +92,8 @@ const meta = {
   parameters: { layout: 'fullscreen' },
   tags: ['autodocs'],
   argTypes: {
-    size: { control: { type: 'range', min: 16, max: 48, step: 4 } },
-    color: { control: 'color' },
+    size:      { control: { type: 'range', min: 12, max: 48, step: 4 } },
+    color:     { control: 'color' },
     showNames: { control: 'boolean' },
   },
   args: {
@@ -110,10 +108,20 @@ type Story = StoryObj<typeof meta>
 
 // ─── Stories ──────────────────────────────────────────────────────────────────
 
+/** Default 24 px — stroke 1.6 px */
 export const Default: Story = {}
 
+/** 20 px — stroke 1.4 px */
+export const Medium: Story = { args: { size: 20 } }
+
+/** 16 px — stroke 1.2 px */
+export const Small: Story = { args: { size: 16 } }
+
+/** 40 px — stroke 1.6 px */
 export const Large: Story = { args: { size: 40 } }
 
+/** Brand orchid colour */
 export const Brand: Story = { args: { color: '#c95bc1' } }
 
+/** Grid without labels */
 export const NoLabels: Story = { args: { showNames: false, size: 32 } }
