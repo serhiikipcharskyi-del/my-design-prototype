@@ -318,3 +318,25 @@ body {
 [data-icon] svg {
   stroke-width: var(--icon-stroke, var(--icon-stroke-24));
 }
+
+/* ─────────────────────────────────────────────────────────────────
+   LogoAnimation spin.
+   A single exported frame (badge + glow + W mark composited together)
+   rotated continuously — the simplest faithful take on Figma's four
+   snapshots, which were really just samples of one rotating image.
+   ───────────────────────────────────────────────────────────────── */
+@keyframes logo-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   `rounded-full` override — cross-browser fix.
+   Tailwind v4's default `rounded-full` emits `border-radius: 3.40282e38px`
+   (a stand-in for infinity). Chromium clamps this to a perfect circle, but
+   Safari fails to parse the exponent-notation value and renders square
+   corners instead. 9999px achieves the same "always fully round" effect
+   and is well within every browser's supported range.
+   ───────────────────────────────────────────────────────────────── */
+@utility rounded-full {
+  border-radius: 9999px !important;
+}

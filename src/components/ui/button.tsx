@@ -24,6 +24,12 @@ export interface ButtonProps
    * - sm: orchid-tinted text and hover tint (tag style)
    */
   darkBg?: boolean
+  /**
+   * Ghost-variant only: tints the label/icon vibrant-coral instead of white —
+   * for destructive actions on a dark toolbar (e.g. BulkActions) where a
+   * solid red `dangerous` button would be too heavy.
+   */
+  destructive?: boolean
 }
 
 // ─── Spinner ─────────────────────────────────────────────────────────────────
@@ -47,6 +53,7 @@ const Spinner = ({ className }: { className?: string }) => (
 //   Primary    bg=orchid-1000  border=white/20  ring=orchid-1000  label=green→white(hover)  icon=white
 //   Secondary  bg=white        border=grey-200                    label=grey-950            icon=grey-1000
 //   Ghost      bg=transparent  border=none                        label=white               icon=white
+//              + destructive → label/icon=vibrant-coral instead of white (still transparent/hover-white)
 //   Dangerous  bg=danger       border=white/20  ring=orchid-1000  label=white               icon=white
 //
 //   Secondary + darkBg (lg/md): transparent base, grey hover tint, grey text
@@ -158,6 +165,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       loading = false,
       disabled,
       darkBg = false,
+      destructive = false,
       children,
       className,
       ...props
@@ -169,7 +177,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const styles =
       variant === 'secondary' && darkBg
         ? getSecondaryDarkBgStyle(size)
-        : variantStyles[variant]
+        : variant === 'ghost' && destructive
+          ? { ...variantStyles.ghost, label: 'text-variant-vibrant-coral', icon: 'text-variant-vibrant-coral' }
+          : variantStyles[variant]
 
     return (
       <button

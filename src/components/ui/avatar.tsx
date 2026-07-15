@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { clsx } from 'clsx'
 import { Icon } from './icons/Icon'
+import { PersonIcon } from './icons/pictograms'
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -19,20 +20,6 @@ export interface AvatarProps {
   tooltip?: string
   className?: string
 }
-
-// ─── Fallback icon ────────────────────────────────────────────────────────────
-//
-// Generic filled person glyph — used when neither `src` nor `initials` is given.
-// Not part of the shared (auto-generated) icon set, since it's Avatar-specific.
-
-const PersonIcon = ({ size }: { size: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true">
-    <path
-      fill="currentColor"
-      d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-4.418 0-9 2.239-9 5v2a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-2c0-2.761-4.582-5-9-5Z"
-    />
-  </svg>
-)
 
 // ─── Style maps ───────────────────────────────────────────────────────────────
 //
@@ -91,9 +78,13 @@ export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
     const showImage = Boolean(src)
 
     return (
-      <div ref={ref} className={clsx('group relative inline-flex shrink-0', className)}>
+      <div ref={ref} className="group relative inline-flex shrink-0">
         <div
-          className={clsx('relative shrink-0 overflow-hidden rounded-full', !showImage && 'bg-tag-teal-100')}
+          className={clsx(
+            'relative shrink-0 overflow-hidden rounded-full',
+            !showImage && 'bg-tag-teal-100',
+            className,
+          )}
           style={{ width: size, height: size }}
         >
           {showImage ? (
